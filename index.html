@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Loppupresis</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <div id="flex-container">
+    <div id="wrapper">
+      <h1>Loppupresentaatio</h1>
+      <div id="wheel-container">
+        <img id="wheel" src="img/rengas.png" onclick="rotate()" >
+      </div>
+      <img id="pin" height="55px" src="img/pin.png">
+    </div>
+  </div>
+  <video id="animation">
+    <source src="video/presis_animaatio.mp4"></source>
+  </video>
+
+  <!-- Modal-ikkunat alkaa tästä -->
+  <div id="userModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Käyttäjä</h2>
+    </div>
+  </div>
+  <div id="usabilityModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Käytettävyys</h2>
+    </div>
+  </div>
+  <div id="processModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Suunnitteluprosessi</h2>
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+    var i = 0;
+    var song = new Audio('audio/heart.mp3');
+    var effect = new Audio('audio/prize.wav');
+    var anim = document.getElementById('animation');
+    $('#wheel').click(function() {
+      if (i == 0) {
+        $(this).css('transform', 'rotate(2220deg)');
+        effect.play();
+        setTimeout(function() {
+          $('#userModal').css('display', 'block');
+        }, 7000);
+      } else if (i == 1) {
+        $(this).css('transform', 'rotate(4140deg)');
+        effect.play();
+        setTimeout(function() {
+          $('#usabilityModal').css('display', 'block');
+        }, 7000);
+      } else if (i == 2) {
+        $(this).css('transform', 'rotate(6060deg)');
+        effect.play();
+        setTimeout(function() {
+          $('#processModal').css('display', 'block');
+        }, 7000);
+      } else if (i == 3) {
+        $(this).css('transition', 'ease-in 10s');
+        $(this).css('transform', 'rotate(15000deg)');
+        setTimeout(function() {
+          song.play();
+        }, 1000);
+        setTimeout(function() {
+          $('#wheel-container').css('transition', 'ease-in 5s');
+          $('#wheel-container').css('transform', 'translateY(-200%)');
+        }, 6000);
+        setTimeout(function() {
+          var viesti = window.confirm("Työni täällä on tehty. Jää hyvästit Leirinuotio!");
+          console.log(viesti);
+          if (viesti == true) {
+            $('#animation').css('display', 'block');
+            anim.play();
+          }
+        }, 9000);
+      }
+      i = i + 1;
+      console.log(i);
+    });
+    $('.close').click(function() {
+      $('.modal').css('display', 'none');
+    });
+  </script>
+</body>
+</html>
